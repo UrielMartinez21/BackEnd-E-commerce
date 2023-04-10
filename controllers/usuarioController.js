@@ -1,4 +1,5 @@
 import Usuario from "../models/Usuario.js"
+import generarId from "../helpers/generarId.js"
 
 export const crearUsuario = async (req, res) => {
   const { email } = req.body
@@ -15,8 +16,11 @@ export const crearUsuario = async (req, res) => {
   try {
     //--> Crea un usuario apartir de lo que recibio
     const usuario = new Usuario(req.body)
+    usuario.token = generarId()
+
     //--> Guardar registro en DB
     const usuarioAlmacenado = await usuario.save()
+
     //--> Muestra el usuario que se creo
     res.json(usuarioAlmacenado)
 

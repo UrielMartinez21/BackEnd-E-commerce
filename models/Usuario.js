@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 //--> Definir estructura de usuario
+//--> Va a interactuar con la DB
 //--> Creara una tabla con las columnas
 const usuarioSchema = mongoose.Schema(
   {
@@ -33,7 +34,7 @@ const usuarioSchema = mongoose.Schema(
 }
 )
 
-//--> Crear modelo usuario
+//--> Crear modelo usuario / tabla usuario
 const Usuario = mongoose.model("Usuario", usuarioSchema)
 
 //--> Exportar modelo creado

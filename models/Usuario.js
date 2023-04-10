@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+// import bcrypt from "bcrypt"
 
 //--> Definir estructura de usuario
 //--> Va a interactuar con la DB

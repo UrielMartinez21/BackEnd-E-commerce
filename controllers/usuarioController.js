@@ -1,11 +1,11 @@
 import Usuario from "../models/Usuario.js"
 
 export const crearUsuario = async (req, res) => {
-  //--> Evitar registros duplicados
   const { email } = req.body
   //--> Busca el email en la tabla
   const existeUsuario = await Usuario.findOne({ email })
 
+  //--> Evitar registros duplicados
   if (existeUsuario) {
     const error = new Error("Usuario ya registrado")
     return res.status(400).json({ msg: error.message })

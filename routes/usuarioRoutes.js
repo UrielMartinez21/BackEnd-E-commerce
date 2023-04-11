@@ -1,11 +1,11 @@
 import express from "express"
-import { crearUsuario } from "../controllers/usuarioController.js"
+import { autenticar, crearUsuario } from "../controllers/usuarioController.js"
 
 const usuarioRoutes = express.Router()
 
 //----------------------------| Autenticacion, registro y confirmacion de usuarios |----------------------------
 usuarioRoutes.post("/", crearUsuario)
-
+usuarioRoutes.post("/login", autenticar)
 
 // usuarioRoutes.get(
 //   "/confirmar",                       // Recibe la url donde fue llamado y añade '/confirmar'

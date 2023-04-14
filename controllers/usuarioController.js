@@ -1,6 +1,7 @@
 import Usuario from "../models/Usuario.js"
 import generarId from "../helpers/generarId.js"
 
+//--------------------------------| Crear usuario |--------------------------------
 export const crearUsuario = async (req, res) => {
   const { email } = req.body
   //--> Busca el email en la tabla
@@ -27,7 +28,9 @@ export const crearUsuario = async (req, res) => {
   } catch (error) { console.log(error) }
 }
 
+//--------------------------------| Autenticar usuario |--------------------------------
 export const autenticar = async (req, res) => {
+  //--> Lo que mandamos al back-end
   const { email, password } = req.body
 
   //--> Comprobar si el usuario existe
@@ -40,6 +43,16 @@ export const autenticar = async (req, res) => {
     const error = new Error("El usuario no ha sido confirmado")
     return res.status(403).json({ msg: error.message })
   }
-  //--> Comprobar si el usuario esta autenticado
   //--> Comprobar su password
+  if (await usuario.comprobarPassword(password)) {
+    res.json({
+      _id: usuario._id,
+      nombre: usuario.nombre,
+      email: usuario.email
+    })
+  }
+  else {
+    const error = new Error("El password es incorrecto")
+    return res.status(403).json({ msg: error.message })
+  }
 }
